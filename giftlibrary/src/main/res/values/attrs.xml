@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--gift layout-->
+    <declare-styleable name="gift_layout">
+        <attr name="show_gift_counts" format="integer" />
+    </declare-styleable>
+
+</resources>

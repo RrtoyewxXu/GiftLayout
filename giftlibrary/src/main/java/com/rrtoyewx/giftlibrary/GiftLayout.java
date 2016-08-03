@@ -4,6 +4,7 @@ import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.animation.ObjectAnimator;
 import android.content.Context;
+import android.content.res.TypedArray;
 import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.CheckResult;
@@ -21,12 +22,15 @@ import java.util.List;
  * Created by Rrtoyewx on 16/8/3.
  */
 public class GiftLayout extends LinearLayout {
+    private static final int DEFAULT_SHOW_GIFT_COUNTS = 3;
+
     private List<GiftItem> mShowGiftItems = new ArrayList<>();
     private Deque<GiftItem> mWaitingGiftItems = new LinkedList<>();
 
     private OnLoadSameItemListener mOnLoadSameItemListener;
     private AnimatorHandler handler = new AnimatorHandler();
 
+    private int mGiftCounts;
 
     public interface OnLoadSameItemListener {
         void onLoadSame(GiftItem showItem, GiftItem unloadItem);
@@ -42,6 +46,11 @@ public class GiftLayout extends LinearLayout {
 
     public GiftLayout(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
+        TypedArray typedArray = context.getTheme().obtainStyledAttributes(attrs, R.styleable.gift_layout, defStyleAttr, 0);
+
+        mGiftCounts = typedArray.getInt(R.styleable.gift_layout_show_gift_counts, DEFAULT_SHOW_GIFT_COUNTS);
+
+        typedArray.recycle();
         setOrientation(LinearLayout.VERTICAL);
     }
 
